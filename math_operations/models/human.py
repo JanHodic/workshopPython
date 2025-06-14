@@ -4,4 +4,8 @@ class Human:
         self.height = height
         self.width = width
         self.points = points
+        self.center_X = 0
+        self.center_Y = 0
+        self.velocity_X = 0
+        self.velocity_Y = 0
 
