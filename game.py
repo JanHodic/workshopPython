@@ -37,6 +37,7 @@ def run_game():
     # Definice spritu
 
     font = pygame.font.SysFont(None, 32)
+    score_font = pygame.font.SysFont(None, 28)
     # Nastaveni okna aj.
     screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.HWSURFACE | pygame.DOUBLEBUF)
     pygame.display.set_caption("Running Game")
@@ -94,6 +95,8 @@ def run_game():
         tenths = int((total_seconds - int(total_seconds)) * 10)
 
         time_text = font.render(f"Time: {minutes:02}:{seconds:02}.{tenths}", True, BLACK)
+        score_text = score_font.render(f"Score: {0}", True, BLACK)
+
         # Update
         my_sprites.update()
 
@@ -102,6 +105,7 @@ def run_game():
         my_sprites.draw(screen)
         draw_parallax_background(screen, layers, scroll_enabled)
         screen.blit(time_text, (30, 30))
+        screen.blit(score_text, (30, 60))
         pygame.display.flip()
 
     pygame.quit()
