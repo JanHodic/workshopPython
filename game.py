@@ -70,22 +70,18 @@ def run_game():
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
+                    game.change_velocity(5)
                     scroll_enabled = True
+                elif event.key == pygame.K_LEFT:
+                    game.change_velocity(-5)
+                elif event.key == pygame.K_SPACE:
+                    print("klavesa")
+                    game.jump(jump_velocity=10)  # hodnota dle potřeby
 
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT:
                     scroll_enabled = False
-
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    game.change_velocity(5)
-                elif event.key == pygame.K_LEFT:
-                    game.change_velocity(-5)
-                elif event.key == pygame.K_SPACE:
-                    game.jump(jump_velocity=10)  # hodnota dle potřeby
-
-            elif event.type == pygame.KEYUP:
-                if event.key in [pygame.K_RIGHT, pygame.K_LEFT]:
+                elif event.key in [pygame.K_RIGHT, pygame.K_LEFT]:
                     game.change_velocity(0)  # zastaví horizontální pohyb
         # Update
         my_sprites.update()
