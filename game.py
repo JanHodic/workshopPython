@@ -1,6 +1,7 @@
 import pygame
 
-from background.bg import draw_parallax_background
+from background.bg import draw_parallax_background, init_layers
+
 
 def run_game():
     # konstanty a fce které neinteragují s pygame!
@@ -37,32 +38,22 @@ def run_game():
     screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.HWSURFACE | pygame.DOUBLEBUF)
     pygame.display.set_caption("Running Game")
 
-    layers = [
-        {"image": pygame.image.load("src/images/layer-1.png").convert_alpha(), "speed": 0.2, "y": 0},
-        {"image": pygame.image.load("src/images/layer-2.png").convert_alpha(), "speed": 0.5, "y": 100},
-        {"image": pygame.image.load("src/images/layer-3.png").convert_alpha(), "speed": 1.0, "y": 0},
-        {"image": pygame.image.load("src/images/layer-4.png").convert_alpha(), "speed": 2.0, "y": 100},
-        {"image": pygame.image.load("src/images/layer-5.png").convert_alpha(), "speed": 3.0, "y": 100},
-    ]
-
-
-    for layer in layers:
-        layer["x1"] = 0
-        layer["x2"] = layer["image"].get_width()
 
     # hodiny - FPS CLOCK / heart rate
     clock = pygame.time.Clock()
+    layers = init_layers()
 
     # Kolecke spritů
     my_sprites = pygame.sprite.Group()
-
+    scroll_enabled = False
     # start:
     running = True
 
     # cyklus udrzujici okno v chodu
     while running:
         # FPS kontrola / jeslti bezi dle rychlosti!
-        dt = clock.tick(FPS)
+        clock.tick(FPS)
+
 
         # Event
         for event in pygame.event.get():
@@ -70,13 +61,21 @@ def run_game():
             if event.type == pygame.QUIT:
                 running = False
 
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    scroll_enabled = True
+
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    scroll_enabled = False
+
         # Update
         my_sprites.update()
 
         # Render
         screen.fill(BLACK)
         my_sprites.draw(screen)
-        draw_parallax_background(screen, layers)
+        draw_parallax_background(screen, layers, scroll_enabled)
         pygame.display.flip()
 
     pygame.quit()

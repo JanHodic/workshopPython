@@ -1,6 +1,9 @@
 import pygame
 import sys
 
+from background.bg import init_layers, draw_parallax_background
+
+
 def home_screen():
     # Inicializace pygame
     pygame.init()
@@ -13,6 +16,7 @@ def home_screen():
     # Barvy
     BLUE = (50, 100, 200)
     WHITE = (255, 255, 255)
+    layers = init_layers()
 
     # Tlačítko
     button_rect = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2 - 40, 200, 80)
@@ -27,6 +31,8 @@ def home_screen():
         screen.fill(WHITE)
 
         # Vykresli tlačítko
+        draw_parallax_background(screen, layers, False)
+
         pygame.draw.rect(screen, BLUE, button_rect)
         screen.blit(text, text_rect)
 
