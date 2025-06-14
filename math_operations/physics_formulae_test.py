@@ -1,5 +1,5 @@
 import unittest
-import math_operations
+import constants
 
 from physics_formulae import PhysicsFormulae  # nahraď skutečným názvem modulu
 
@@ -20,7 +20,7 @@ class physics_formulae_test(unittest.TestCase):
     def setUp(self):
         self.human = DummyHuman(width=0.5, mass=70)
         self.cave = DummyCave(coeff=0.9)
-        self.physics = PhysicsFormulae(self.human, self.cave, step=0.1)
+        self.physics = PhysicsFormulae(self.human, self.cave)
 
     def test_return_height(self):
         h = self.physics.return_height(time=2, initial_velocity=20)
@@ -29,7 +29,7 @@ class physics_formulae_test(unittest.TestCase):
 
     def test_return_break_force(self):
         velocity = 10
-        expected = 0.5 * self.human.width ** 2 * self.physics.coefficient * velocity ** 2
+        expected = 0.5 * self.human.width ** 2 * constants.COEFFICIENT * velocity ** 2
         self.assertAlmostEqual(self.physics.return_break_force(velocity), expected, places=5)
 
     def test_return_initial_velocity_on_jump(self):
@@ -41,7 +41,7 @@ class physics_formulae_test(unittest.TestCase):
     def test_initial_velocity_after_jumps_with_damping(self):
         cave = DummyCave(coeff=0.5)
         human = DummyHuman(width=0.5, mass=70)
-        physics = PhysicsFormulae(human, cave, step=0.1)
+        physics = PhysicsFormulae(human, cave)
 
         initial_velocity = 10.0
         jumps = 3
