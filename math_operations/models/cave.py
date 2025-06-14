@@ -1,10 +1,9 @@
-class Cave:
+class World:
 
-    def __init__(self, elasticity_coeff, height, velocity):
+    def __init__(self, elasticity_coeff, ground, velocity):
         self.elasticity_coeff = elasticity_coeff
-        self.cave = height
+        self.ground = ground
         self.velocity = velocity
         self.map = []
 
-    def create_cave(self):
-        return 0
+    #def create_world(self):
