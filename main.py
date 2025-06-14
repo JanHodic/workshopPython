@@ -1,6 +1,6 @@
 import pygame
 
-from bacground.bg import draw_parallax_background
+from background.bg import draw_parallax_background
 
 # konstanty a fce které neinteragují s pygame!
 BLACK = (0, 0, 0)
