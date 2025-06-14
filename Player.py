@@ -15,11 +15,19 @@ class Player(pygame.sprite.Sprite):
         self.image = self.frames[self.frame_index]
         self.rect = self.image.get_rect(center=(x, y))
 
-        self.speed = 5
+        # Rychlosti
+        self.walk_speed = 5
+        self.run_speed = 9
+        self.jump_strength = -15    # záporné = skok nahoru
+        self.gravity = 0.8
+
+        # Stav
+        self.velocity = pygame.Vector2(0, 0)
+        self.on_ground = True       # zatím jednoduchý model (hrací plocha = spodní okraj)
+
+        # Animace
         self.anim_timer = 0
         self.anim_interval = 100
-
-        self.velocity = pygame.Vector2(0, 0)
 
     def load_first_row_frames(self):
         return [
@@ -32,13 +40,35 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
         moved = False
 
+        # Zjisti, zda je stisknutý Shift
+        running = keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]
+        speed = self.run_speed if running else self.walk_speed
+
+        # Vodorovný pohyb
         if keys[pygame.K_LEFT]:
-            self.rect.x -= self.speed
+            self.rect.x -= speed
             moved = True
         if keys[pygame.K_RIGHT]:
-            self.rect.x += self.speed
+            self.rect.x += speed
             moved = True
 
+        # Skok – jen pokud je na zemi
+        if keys[pygame.K_SPACE] and self.on_ground:
+            self.velocity.y = self.jump_strength
+            self.on_ground = False
+
+        # Gravitace
+        self.velocity.y += self.gravity
+        self.rect.y += self.velocity.y
+
+        # ZEM: ohraničení spodní hranou
+        floor_y = self.game.screen.get_height() - self.rect.height
+        if self.rect.bottom >= floor_y:
+            self.rect.bottom = floor_y
+            self.velocity.y = 0
+            self.on_ground = True
+
+        # Animace
         if moved:
             self.anim_timer += self.game.clock.get_time()
             if self.anim_timer > self.anim_interval:
@@ -49,5 +79,5 @@ class Player(pygame.sprite.Sprite):
             self.frame_index = 0
             self.image = self.frames[self.frame_index]
 
-        # Omez pohyb v rámci obrazovky
+        # Omez pohyb v rámci obrazovky (X směr)
         self.rect.clamp_ip(pygame.Rect(0, 0, self.game.screen.get_width(), self.game.screen.get_height()))
