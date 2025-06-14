@@ -16,10 +16,10 @@ class PhysicsFormulae:
         return 0.5 * self.human.width * self.human.width * self.coefficient * velocity * velocity
 
     def return_initial_velocity_on_jump(self, jumps, initial_velocity):
-        return self.cave.elasticity_coeff ^ jumps * initial_velocity
+        return self.cave.coeff ** jumps * initial_velocity
 
     def return_fall_velocity(self, time):
-        return math.sqrt(self.gravity_acceleration / (0.5 * self.coefficient * self.human.width * self.human.width)) * ( math.tanh(math.sqrt(self.gravity_acceleration * (0.5 * self.coefficient * self.human.width * self.human.width)/self.human.mass ^2)) * time)
+        return math.sqrt(self.gravity_acceleration / (0.5 * self.coefficient * self.human.width * self.human.width)) * (math.tanh(math.sqrt(self.gravity_acceleration * (0.5 * self.coefficient * self.human.width * self.human.width) / self.human.mass ** 2)) * time)
 
     def return_fall_position(self, initial_height, time):
         velocity = self.return_fall_velocity(time)
