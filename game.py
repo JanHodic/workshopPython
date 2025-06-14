@@ -1,4 +1,6 @@
 import pygame
+
+from Player import Player
 from math_operations.models.human import Human
 from math_operations.models.world import World
 from business_logic.game_process import GameProcess
@@ -58,7 +60,11 @@ def run_game():
     human = Human(mass=50, width=50, height=100)
     world = World(elasticity_coeff=0.9, ground=400, velocity=3.0)
     game = GameProcess(human=human, world=world, time_step=1 / 45)
+    player = Player(game, x=100, y=490)
+    player.game.clock = clock  # předání clock do playera
+    player.game.screen = screen  # předání screen (kvůli clamp_ip)
 
+    my_sprites.add(player)
     # cyklus udrzujici okno v chodu
     while running:
         # FPS kontrola / jeslti bezi dle rychlosti!
@@ -101,11 +107,13 @@ def run_game():
         my_sprites.update()
 
         # Render
+
         screen.fill(BLACK)
-        my_sprites.draw(screen)
         draw_parallax_background(screen, layers, scroll_enabled)
+        my_sprites.draw(screen)
         screen.blit(time_text, (30, 30))
         screen.blit(score_text, (30, 60))
+
         pygame.display.flip()
 
     pygame.quit()
