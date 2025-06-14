@@ -14,7 +14,7 @@ def run_game():
 
     WIDTH = 800
     HEIGHT = 600
-    FPS = 45
+    FPS = 60
 
 
     # Nastav název okna
