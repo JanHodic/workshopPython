@@ -36,7 +36,7 @@ def run_game():
 
     # Definice spritu
 
-
+    font = pygame.font.SysFont(None, 32)
     # Nastaveni okna aj.
     screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.HWSURFACE | pygame.DOUBLEBUF)
     pygame.display.set_caption("Running Game")
@@ -49,6 +49,8 @@ def run_game():
     # Kolecke spritů
     my_sprites = pygame.sprite.Group()
     scroll_enabled = False
+    start_ticks = pygame.time.get_ticks()
+
     # start:
     running = True
 
@@ -83,6 +85,15 @@ def run_game():
                     scroll_enabled = False
                 elif event.key in [pygame.K_RIGHT, pygame.K_LEFT]:
                     game.change_velocity(0)  # zastaví horizontální pohyb
+
+        # Výpočet času
+        elapsed_ms = pygame.time.get_ticks() - start_ticks
+        total_seconds = elapsed_ms / 1000
+        minutes = int(total_seconds) // 60
+        seconds = int(total_seconds) % 60
+        tenths = int((total_seconds - int(total_seconds)) * 10)
+
+        time_text = font.render(f"Time: {minutes:02}:{seconds:02}.{tenths}", True, BLACK)
         # Update
         my_sprites.update()
 
@@ -90,6 +101,7 @@ def run_game():
         screen.fill(BLACK)
         my_sprites.draw(screen)
         draw_parallax_background(screen, layers, scroll_enabled)
+        screen.blit(time_text, (30, 30))
         pygame.display.flip()
 
     pygame.quit()
