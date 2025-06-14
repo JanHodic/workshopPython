@@ -1,0 +1,53 @@
+# 🐍 Python cache a build soubory
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# 🔧 Virtuální prostředí
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# 💾 Logy, databáze a další pracovní soubory
+*.log
+*.sqlite3
+*.db
+
+# 📦 Závislosti v zip/whl
+*.whl
+
+# 🧪 Testovací výstupy
+htmlcov/
+.coverage
+.tox/
+.nox/
+.cache/
+pytest_cache/
+
+# 🛠 PyCharm/JetBrains IDE
+.idea/
+
+# 📦 VSCode (pokud někdo používá)
+.vscode/
+
+# 🔐 Proměnné prostředí nebo tajné klíče
+.env
+.env.*
+
+# 🔄 Git zámky nebo přechodné soubory
+*.swp
+*.bak
+*.tmp
+*.orig
+
+# 🔗 Symbolické odkazy nebo symlinks, pokud nějaké generuješ
+*.lnk
