@@ -1,5 +1,5 @@
 import unittest
-import math
+import math_operations
 
 from your_module_name import PhysicsFormulae  # nahraď skutečným názvem modulu
 

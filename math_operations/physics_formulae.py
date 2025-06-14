@@ -1,4 +1,4 @@
-import math
+import math_operations
 
 class PhysicsFormulae:
 
@@ -19,7 +19,7 @@ class PhysicsFormulae:
         return self.cave.elasticity_coeff ^ jumps * initial_velocity
 
     def return_fall_velocity(self, time):
-        return math.sqrt(self.gravity_acceleration / (0.5 * self.coefficient * self.human.width * self.human.width)) * ( math.tanh(math.sqrt(self.gravity_acceleration * (0.5 * self.coefficient * self.human.width * self.human.width)/self.human.mass ^2)) * time)
+        return math_operations.sqrt(self.gravity_acceleration / (0.5 * self.coefficient * self.human.width * self.human.width)) * (math_operations.tanh(math_operations.sqrt(self.gravity_acceleration * (0.5 * self.coefficient * self.human.width * self.human.width) / self.human.mass ^ 2)) * time)
 
     def return_fall_position(self, initial_height, time):
         velocity = self.return_fall_velocity(time)
