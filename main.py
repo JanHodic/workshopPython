@@ -33,7 +33,7 @@ pygame.display.set_icon(icon)
 
 # Nastaveni okna aj.
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("My caption of the game")
+pygame.display.set_caption("Running Game")
 
 # hodiny - FPS CLOCK / heart rate
 clock = pygame.time.Clock()
