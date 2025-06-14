@@ -1,5 +1,5 @@
 import math
-import constants
+from . import constants
 
 class PhysicsFormulae:
 
