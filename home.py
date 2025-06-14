@@ -24,7 +24,7 @@ def home_screen():
     font = pygame.font.SysFont(None, 28)
 
     title_text = title_font.render("RUNNIG GAME", True, DARK)
-    title_rect = title_text.get_rect(center=(WIDTH // 2, 100))
+    title_rect = title_text.get_rect(center=(WIDTH // 2, 200))
 
     # Menu položky jako seznam dictů
     buttons = [
