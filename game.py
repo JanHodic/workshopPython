@@ -53,7 +53,7 @@ def run_game():
     running = True
 
     human = Human(mass=50, width=50, height=100)
-    world = World(None,None,None)  # můžeš přidat překážky
+    world = World(elasticity_coeff=0.9, ground=400, velocity=3.0)
     game = GameProcess(human=human, world=world, time_step=1 / 45)
 
     # cyklus udrzujici okno v chodu
