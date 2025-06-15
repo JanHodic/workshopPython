@@ -12,7 +12,11 @@ from explosion import Explosion
 from background.bg import draw_parallax_background, init_layers
 
 
-def run_game():
+def run_game(difficulty="beginner"):
+    if difficulty == "expert":
+        enemy_spawn_interval = 2500  # těžší
+    else:
+        enemy_spawn_interval = 5000  # snadnější
     # konstanty a fce které neinteragují s pygame!
     BLACK = (0, 0, 0)
     PURPLE = (150, 10, 100)
@@ -55,7 +59,7 @@ def run_game():
 
     # časový interval nového enemy
     enemy_spawn_timer = 0
-    enemy_spawn_interval = 5000
+    enemy_spawn_interval = enemy_spawn_interval
 
     # Kolecke spritů
     my_sprites = pygame.sprite.Group()

@@ -3,12 +3,10 @@ from game import run_game
 
 def main():
     while True:
-        result = home_screen()
-        if result == "start":
-            run_game()
-        elif result == "settings":
-            print("Zde můžeš otevřít nastavení…")
-        elif result == "exit":
+        action, difficulty = home_screen()
+        if action == "start":
+            run_game(difficulty)
+        elif action == "exit":
             break  # nebo sys.exit()
 
 if __name__ == "__main__":
