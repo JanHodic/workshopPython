@@ -29,10 +29,12 @@ class Player(pygame.sprite.Sprite):
         self.anim_timer = 0
         self.anim_interval = 100
 
+
+
     def load_first_row_frames(self):
         return [
             self.sprite_sheet.subsurface(
-                pygame.Rect(col * self.frame_width, 3 * self.frame_height, self.frame_width, self.frame_height)
+                pygame.Rect(col * self.frame_width, 3 * self.frame_height-10, self.frame_width, self.frame_height)
             ) for col in range(self.columns)
         ]
 
@@ -62,7 +64,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += self.velocity.y
 
         # ZEM: ohraničení spodní hranou
-        floor_y = self.game.screen.get_height() - self.rect.height + 30
+        floor_y = self.game.screen.get_height() - self.rect.height + 15
         if self.rect.bottom >= floor_y:
             self.rect.bottom = floor_y
             self.velocity.y = 0
