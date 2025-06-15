@@ -24,7 +24,7 @@ def home_screen():
     font = pygame.font.SysFont(None, 28)
 
     # Načti a zmenši obrázek ovládání
-    controls_img_original = pygame.image.load("assets/image.jpeg").convert_alpha()
+    controls_img_original = pygame.image.load("assets/navigation.png").convert_alpha()
     controls_img = pygame.transform.scale(controls_img_original, (150, 150))
     controls_rect = controls_img.get_rect(topright=(WIDTH - 20, 20))  # 20 px od pravého a horního okraje
 
