@@ -18,7 +18,7 @@ class Player(pygame.sprite.Sprite):
         # Rychlosti
         self.walk_speed = 5
         self.run_speed = 9
-        self.jump_strength = -15    # záporné = skok nahoru
+        self.jump_strength = -25    # záporné = skok nahoru
         self.gravity = 0.8
 
         # Stav

@@ -154,10 +154,10 @@ def run_game():
             final_time_text = small_font.render(f"Time: {minutes:02}:{seconds:02}.{tenths}", True, BLACK)
             restart_text = small_font.render("Press SPACE to Restart or ESC to Quit", True, BLACK)
 
-            text_rect = game_over_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 50))
-            score_rect = final_score_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
-            time_rect = final_time_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 40))
-            restart_rect = restart_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 100))
+            text_rect = game_over_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 100))
+            score_rect = final_score_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 60))
+            time_rect = final_time_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 20))
+            restart_rect = restart_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 40))
 
             screen.fill(BLACK)
             draw_parallax_background(screen, layers, False)
