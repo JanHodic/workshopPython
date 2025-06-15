@@ -27,6 +27,8 @@ def home_screen():
 
     title_text = title_font.render("RUNNING GAME", True, DARK)
     title_rect = title_text.get_rect(center=(WIDTH // 2, 200))
+    settings_text = title_font.render("SETTINGS", True, DARK)
+    settings_rect = settings_text.get_rect(center=(WIDTH // 2, 200))
 
     difficulty = "beginner"
     current_menu = "home"
@@ -67,7 +69,7 @@ def home_screen():
     while running:
         screen.fill(WHITE)
         draw_parallax_background(screen, layers, scroll_enabled=False)
-        screen.blit(title_text, title_rect)
+
         current_time = pygame.time.get_ticks()
         elapsed_time = current_time - start_time
 
@@ -78,8 +80,10 @@ def home_screen():
         if elapsed_time > 5000:
             if current_menu == "home":
                 button_rects = create_button_rects(buttons_home, 100)
+                screen.blit(title_text, title_rect)
             else:
                 button_rects = create_button_rects(buttons_settings, 100)
+                screen.blit(settings_text, settings_rect)
         else:
             button_rects = []  # žádné tlačítka před uplynutím času
             # Vykresli obrázek ovládání
