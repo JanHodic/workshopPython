@@ -25,6 +25,8 @@ def run_game():
 
     # fce které interagují s pygame!
     score = 0
+    lives = 5
+    game_over = False
 
     ## Start pygame + start modulů!
     pygame.init()
@@ -111,6 +113,7 @@ def run_game():
 
         time_text = font.render(f"Time: {minutes:02}:{seconds:02}.{tenths}", True, BLACK)
         score_text = score_font.render(f"Score: {score}", True, BLACK)
+        lives_text = score_font.render(f"Lives: {lives}", True, BLACK)
 
         enemy_spawn_timer += clock.get_time()
         if enemy_spawn_timer > enemy_spawn_interval:
@@ -128,7 +131,46 @@ def run_game():
                 if isinstance(sprite, Enemy) and not sprite.scored:
                     if sprite.rect.right < player.rect.left:
                         score += 1
+                        lives -=1
                         sprite.scored = True
+                        if lives <= 0:
+                            running = False
+                            game_over = True
+
+        if game_over:
+            game_over_font = pygame.font.SysFont(None, 72)
+            small_font = pygame.font.SysFont(None, 36)
+
+            game_over_text = game_over_font.render("GAME OVER", True, RED)
+            final_score_text = small_font.render(f"Score: {score}", True, BLACK)
+            final_time_text = small_font.render(f"Time: {minutes:02}:{seconds:02}.{tenths}", True, BLACK)
+            restart_text = small_font.render("Press SPACE to Restart or ESC to Quit", True, BLACK)
+
+            text_rect = game_over_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 50))
+            score_rect = final_score_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+            time_rect = final_time_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 40))
+            restart_rect = restart_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 100))
+
+            screen.fill(BLACK)
+            draw_parallax_background(screen, layers, False)
+            screen.blit(game_over_text, text_rect)
+            screen.blit(final_score_text, score_rect)
+            screen.blit(final_time_text, time_rect)
+            screen.blit(restart_text, restart_rect)
+            pygame.display.flip()
+
+            waiting = True
+            while waiting:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        return
+                    elif event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            waiting = False  # restart
+                        elif event.key == pygame.K_ESCAPE:
+                            pygame.quit()
+                            return
 
         # Render
 
@@ -137,6 +179,7 @@ def run_game():
         my_sprites.draw(screen)
         screen.blit(time_text, (30, 30))
         screen.blit(score_text, (30, 60))
+        screen.blit(lives_text, (30, 80))
 
         pygame.display.flip()
 
