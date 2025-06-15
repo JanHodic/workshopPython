@@ -31,7 +31,12 @@ def home_screen():
     difficulty = "beginner"
     current_menu = "home"
 
-
+    # Načti a zmenši obrázek ovládání
+    controls_img_original = pygame.image.load("assets/navigation.png").convert_alpha()
+    controls_img = pygame.transform.scale(controls_img_original, (150, 150))
+    controls_rect = controls_img.get_rect(topright=(WIDTH /2 + 100, HEIGHT /2))  # 20 px od pravého a horního okraje
+    home_image = pygame.image.load("assets/uvod.png").convert_alpha()
+    home_rect = home_image.get_rect(topleft=(0,0))
 
     # Tlačítka
     buttons_home = [
@@ -66,8 +71,6 @@ def home_screen():
         current_time = pygame.time.get_ticks()
         elapsed_time = current_time - start_time
 
-        enemy = Enemy(x=400, y=450)  # nebo jaké máš výchozí souřadnice
-        enemy_group = pygame.sprite.Group(enemy)
 
         mouse_pos = pygame.mouse.get_pos()
         cursor_handled = False
@@ -79,8 +82,10 @@ def home_screen():
                 button_rects = create_button_rects(buttons_settings, 100)
         else:
             button_rects = []  # žádné tlačítka před uplynutím času
-            enemy_group.update()
-            enemy_group.draw(screen)
+            # Vykresli obrázek ovládání
+            screen.blit(home_image, home_rect)
+            screen.blit(controls_img, controls_rect)
+
 
         # Vykreslení tlačítek
         for rect, btn in button_rects:
