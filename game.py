@@ -57,7 +57,7 @@ def run_game():
 
     # Kolecke spritů
     my_sprites = pygame.sprite.Group()
-    scroll_enabled = False
+    scroll_enabled = True
     start_ticks = pygame.time.get_ticks()
 
     # start:
@@ -99,9 +99,9 @@ def run_game():
 
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT:
-                    scroll_enabled = False
+                    scroll_enabled = True
                 elif event.key in [pygame.K_RIGHT, pygame.K_LEFT]:
-                    game.change_velocity(0)  # zastaví horizontální pohyb
+                    game.change_velocity(5)  # zastaví horizontální pohyb
 
         # Výpočet času
         elapsed_ms = pygame.time.get_ticks() - start_ticks

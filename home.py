@@ -23,7 +23,7 @@ def home_screen():
     title_font = pygame.font.SysFont(None, 72)  # Titulek
     font = pygame.font.SysFont(None, 28)
 
-    title_text = title_font.render("RUNNIG GAME", True, DARK)
+    title_text = title_font.render("RUNNING GAME", True, DARK)
     title_rect = title_text.get_rect(center=(WIDTH // 2, 200))
 
     # Menu položky jako seznam dictů

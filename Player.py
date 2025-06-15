@@ -38,7 +38,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         keys = pygame.key.get_pressed()
-        moved = False
+        moved = True
 
         # Zjisti, zda je stisknutý Shift
         running = keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]
