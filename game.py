@@ -70,7 +70,7 @@ def run_game():
     my_sprites.add(player)
 
     # enemy
-    enemy = Enemy(x=WIDTH + 50, y=world.ground + 120)  # Spustí se mimo obrazovku zprava
+    enemy = Enemy(x=WIDTH + 50, y=HEIGHT - 85)  # Spustí se mimo obrazovku zprava
     my_sprites.add(enemy)
 
 
@@ -114,7 +114,7 @@ def run_game():
 
         enemy_spawn_timer += clock.get_time()
         if enemy_spawn_timer > enemy_spawn_interval:
-            enemy = Enemy(x=WIDTH + 50, y=world.ground)
+            enemy = Enemy(x=WIDTH + 50, y=HEIGHT - 85)
             my_sprites.add(enemy)
             enemy_spawn_timer = 0
 
