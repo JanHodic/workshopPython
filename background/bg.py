@@ -3,11 +3,11 @@ import pygame
 
 def init_layers():
     layers = [
-        {"image": pygame.image.load("src/images/layer-1.png").convert_alpha(), "speed": 0.2, "y": 0},
-        {"image": pygame.image.load("src/images/layer-2.png").convert_alpha(), "speed": 0.5, "y": 100},
-        {"image": pygame.image.load("src/images/layer-3.png").convert_alpha(), "speed": 1.0, "y": 0, "always_scroll": True},
-        {"image": pygame.image.load("src/images/layer-4.png").convert_alpha(), "speed": 2.0, "y": 100},
-        {"image": pygame.image.load("src/images/layer-5.png").convert_alpha(), "speed": 3.0, "y": 100},
+        {"image": pygame.image.load("assets/layer-1.png").convert_alpha(), "speed": 0.2, "y": 0},
+        {"image": pygame.image.load("assets/layer-2.png").convert_alpha(), "speed": 0.5, "y": 100},
+        {"image": pygame.image.load("assets/layer-3.png").convert_alpha(), "speed": 1.0, "y": 0, "always_scroll": True},
+        {"image": pygame.image.load("assets/layer-4.png").convert_alpha(), "speed": 2.0, "y": 100},
+        {"image": pygame.image.load("assets/layer-5.png").convert_alpha(), "speed": 3.0, "y": 100},
     ]
 
     for layer in layers:

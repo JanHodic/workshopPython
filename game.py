@@ -1,6 +1,7 @@
 import pygame
 
 from Player import Player
+from enemy import Enemy
 from math_operations.models.human import Human
 from math_operations.models.world import World
 from business_logic.game_process import GameProcess
@@ -22,8 +23,6 @@ def run_game():
     FPS = 60
 
 
-    # Nastav název okna
-    pygame.display.set_caption("Moje Pygame aplikace")
     # fce které interagují s pygame!
 
 
@@ -49,6 +48,10 @@ def run_game():
     clock = pygame.time.Clock()
     layers = init_layers()
 
+    # časový interval nového enemy
+    enemy_spawn_timer = 0
+    enemy_spawn_interval = 5000
+
     # Kolecke spritů
     my_sprites = pygame.sprite.Group()
     scroll_enabled = False
@@ -65,6 +68,12 @@ def run_game():
     player.game.screen = screen  # předání screen (kvůli clamp_ip)
 
     my_sprites.add(player)
+
+    # enemy
+    enemy = Enemy(x=WIDTH + 50, y=world.ground + 110)  # Spustí se mimo obrazovku zprava
+    my_sprites.add(enemy)
+
+
     # cyklus udrzujici okno v chodu
     while running:
         # FPS kontrola / jeslti bezi dle rychlosti!
@@ -103,8 +112,18 @@ def run_game():
         time_text = font.render(f"Time: {minutes:02}:{seconds:02}.{tenths}", True, BLACK)
         score_text = score_font.render(f"Score: {0}", True, BLACK)
 
+        enemy_spawn_timer += clock.get_time()
+        if enemy_spawn_timer > enemy_spawn_interval:
+            enemy = Enemy(x=WIDTH + 50, y=world.ground + 110)
+            my_sprites.add(enemy)
+            enemy_spawn_timer = 0
         # Update
-        my_sprites.update()
+        for sprite in my_sprites:
+            if hasattr(sprite, "update"):
+                if isinstance(sprite, Enemy):
+                    sprite.update(scroll_enabled)
+                else:
+                    sprite.update()
 
         # Render
 
