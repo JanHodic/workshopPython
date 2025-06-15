@@ -20,6 +20,8 @@ class Enemy(pygame.sprite.Sprite):
         self.anim_timer = 0
         self.anim_interval = 1300  # ms – mění snímek každých 0.3 sekundy
 
+        self.scored = False
+
     def update(self, scroll_enabled=True):
         if scroll_enabled:
             self.rect.x -= self.speed
@@ -33,3 +35,4 @@ class Enemy(pygame.sprite.Sprite):
 
         if self.rect.right < 0:
             self.kill()
+

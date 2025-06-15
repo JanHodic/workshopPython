@@ -24,7 +24,7 @@ def run_game():
 
 
     # fce které interagují s pygame!
-
+    score = 0
 
     ## Start pygame + start modulů!
     pygame.init()
@@ -110,7 +110,7 @@ def run_game():
         tenths = int((total_seconds - int(total_seconds)) * 10)
 
         time_text = font.render(f"Time: {minutes:02}:{seconds:02}.{tenths}", True, BLACK)
-        score_text = score_font.render(f"Score: {0}", True, BLACK)
+        score_text = score_font.render(f"Score: {score}", True, BLACK)
 
         enemy_spawn_timer += clock.get_time()
         if enemy_spawn_timer > enemy_spawn_interval:
@@ -124,6 +124,10 @@ def run_game():
                     sprite.update(scroll_enabled)
                 else:
                     sprite.update()
+                if isinstance(sprite, Enemy) and not sprite.scored:
+                    if sprite.rect.right < player.rect.left:
+                        score += 1
+                        sprite.scored = True
 
         # Render
 
