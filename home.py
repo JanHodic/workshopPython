@@ -1,5 +1,6 @@
 import pygame
 import sys
+from enemy import Enemy
 from background.bg import init_layers, draw_parallax_background
 
 def home_screen():
@@ -29,6 +30,8 @@ def home_screen():
 
     difficulty = "beginner"
     current_menu = "home"
+
+
 
     # Tlačítka
     buttons_home = [
@@ -63,6 +66,8 @@ def home_screen():
         current_time = pygame.time.get_ticks()
         elapsed_time = current_time - start_time
 
+        enemy = Enemy(x=400, y=450)  # nebo jaké máš výchozí souřadnice
+        enemy_group = pygame.sprite.Group(enemy)
 
         mouse_pos = pygame.mouse.get_pos()
         cursor_handled = False
@@ -74,6 +79,8 @@ def home_screen():
                 button_rects = create_button_rects(buttons_settings, 100)
         else:
             button_rects = []  # žádné tlačítka před uplynutím času
+            enemy_group.update()
+            enemy_group.draw(screen)
 
         # Vykreslení tlačítek
         for rect, btn in button_rects:
