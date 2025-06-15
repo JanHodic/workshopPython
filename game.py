@@ -5,6 +5,7 @@ from enemy import Enemy
 from math_operations.models.human import Human
 from math_operations.models.world import World
 from business_logic.game_process import GameProcess
+from explosion import Explosion
 
 from background.bg import draw_parallax_background, init_layers
 
@@ -68,9 +69,8 @@ def run_game():
     player = Player(game, x=100, y=490)
     player.game.clock = clock  # předání clock do playera
     player.game.screen = screen  # předání screen (kvůli clamp_ip)
-
+    explosions_group = pygame.sprite.Group()
     my_sprites.add(player)
-
     # enemy
     enemy = Enemy(x=WIDTH + 50, y=HEIGHT - 85)  # Spustí se mimo obrazovku zprava
     my_sprites.add(enemy)
@@ -128,14 +128,23 @@ def run_game():
                     sprite.update(scroll_enabled)
                 else:
                     sprite.update()
-                if isinstance(sprite, Enemy) and not sprite.scored:
-                    if sprite.rect.right < player.rect.left:
-                        score += 1
-                        lives -=1
-                        sprite.scored = True
-                        if lives <= 0:
-                            running = False
-                            game_over = True
+
+            # Kolize mezi Enemy a Player
+            if isinstance(sprite, Enemy) and not sprite.scored:
+                if sprite.rect.colliderect(player.rect):
+                    explosion = Explosion(sprite.rect.centerx, sprite.rect.centery, clock)
+                    explosions_group.add(explosion)
+                    my_sprites.remove(sprite)  # Odstraníme kolidujícího enemy
+                    lives -= 1
+                    sprite.scored = True
+                    if lives <= 0:
+                        running = False
+                        game_over = True
+
+                elif sprite.rect.right < player.rect.left:
+                    score += 1
+                    sprite.scored = True
+
 
         if game_over:
             game_over_font = pygame.font.SysFont(None, 72)
@@ -177,6 +186,8 @@ def run_game():
         screen.fill(BLACK)
         draw_parallax_background(screen, layers, scroll_enabled)
         my_sprites.draw(screen)
+        explosions_group.update()
+        explosions_group.draw(screen)
         screen.blit(time_text, (30, 30))
         screen.blit(score_text, (30, 60))
         screen.blit(lives_text, (30, 80))
