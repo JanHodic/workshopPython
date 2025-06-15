@@ -111,7 +111,7 @@ def run_game():
         tenths = int((total_seconds - int(total_seconds)) * 10)
 
         time_text = font.render(f"Time: {minutes:02}:{seconds:02}.{tenths}", True, BLACK)
-        score_text = score_font.render(f"Score: {score}", True, BLACK)
+        score_text = score_font.render(f"Points: {score}", True, BLACK)
         lives_text = score_font.render(f"Lives: {lives}", True, BLACK)
 
         enemy_spawn_timer += clock.get_time()
@@ -150,7 +150,7 @@ def run_game():
             small_font = pygame.font.SysFont(None, 36)
 
             game_over_text = game_over_font.render("GAME OVER", True, RED)
-            final_score_text = small_font.render(f"Score: {score}", True, BLACK)
+            final_score_text = small_font.render(f"Points: {score}", True, BLACK)
             final_time_text = small_font.render(f"Time: {minutes:02}:{seconds:02}.{tenths}", True, BLACK)
             restart_text = small_font.render("Press SPACE to Restart or ESC to Quit", True, BLACK)
 

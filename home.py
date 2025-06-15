@@ -23,6 +23,11 @@ def home_screen():
     title_font = pygame.font.SysFont(None, 72)  # Titulek
     font = pygame.font.SysFont(None, 28)
 
+    # Načti a zmenši obrázek ovládání
+    controls_img_original = pygame.image.load("assets/image.jpeg").convert_alpha()
+    controls_img = pygame.transform.scale(controls_img_original, (150, 150))
+    controls_rect = controls_img.get_rect(topright=(WIDTH - 20, 20))  # 20 px od pravého a horního okraje
+
     title_text = title_font.render("RUNNING GAME", True, DARK)
     title_rect = title_text.get_rect(center=(WIDTH // 2, 200))
 
@@ -51,6 +56,12 @@ def home_screen():
     while running:
         screen.fill(WHITE)
         draw_parallax_background(screen, layers, scroll_enabled=False)
+
+        # Vykresli titulek
+        screen.blit(title_text, title_rect)
+
+        # Vykresli obrázek ovládání
+        screen.blit(controls_img, controls_rect)
 
         # Vykresli titulek
         screen.blit(title_text, title_rect)
