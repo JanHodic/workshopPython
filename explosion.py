@@ -1,8 +1,5 @@
 import pygame
 
-print("Soubor explosion.py byl načten")
-
-
 class Explosion(pygame.sprite.Sprite):
     def __init__(self, x, y, clock):
         super().__init__()

@@ -95,7 +95,6 @@ def run_game():
                 elif event.key == pygame.K_LEFT:
                     game.change_velocity(-5)
                 elif event.key == pygame.K_SPACE:
-                    print("klavesa")
                     game.jump(jump_velocity=10)  # hodnota dle potřeby
 
             elif event.type == pygame.KEYUP:
