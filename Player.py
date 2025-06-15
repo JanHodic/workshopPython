@@ -62,7 +62,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += self.velocity.y
 
         # ZEM: ohraničení spodní hranou
-        floor_y = self.game.screen.get_height() - self.rect.height
+        floor_y = self.game.screen.get_height() - self.rect.height + 30
         if self.rect.bottom >= floor_y:
             self.rect.bottom = floor_y
             self.velocity.y = 0
