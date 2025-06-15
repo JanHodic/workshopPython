@@ -79,6 +79,9 @@ def home_screen():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    return "start"
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 for rect, btn in button_rects:
                     if rect.collidepoint(event.pos):
