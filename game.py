@@ -191,7 +191,9 @@ def run_game():
         screen.blit(time_text, (30, 30))
         screen.blit(score_text, (30, 60))
         screen.blit(lives_text, (30, 80))
-
+        # === LADICÍ OBRYSY (obdélníky kolem sprite.rect) ===
+        for sprite in my_sprites:
+            pygame.draw.rect(screen, (255, 0, 0), sprite.rect, 2)
         pygame.display.flip()
 
     pygame.quit()
