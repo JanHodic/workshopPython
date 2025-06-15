@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 
 from Player import Player
@@ -177,7 +179,7 @@ def run_game():
                         if event.key == pygame.K_SPACE:
                             waiting = False  # restart
                         elif event.key == pygame.K_ESCAPE:
-                            pygame.quit()
+                            sys.exit()
                             return
 
         # Render
