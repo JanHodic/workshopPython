@@ -119,6 +119,7 @@ def run_game(difficulty="beginner"):
         time_text = font.render(f"Time: {minutes:02}:{seconds:02}.{tenths}", True, BLACK)
         score_text = score_font.render(f"Points: {score}", True, BLACK)
         lives_text = score_font.render(f"Lives: {lives}", True, BLACK)
+        dif_text = score_font.render(f"Difficulty: {difficulty}", True, BLACK)
 
         enemy_spawn_timer += clock.get_time()
         if enemy_spawn_timer > enemy_spawn_interval:
@@ -196,6 +197,7 @@ def run_game(difficulty="beginner"):
         screen.blit(time_text, (30, 30))
         screen.blit(score_text, (30, 60))
         screen.blit(lives_text, (30, 80))
+        screen.blit(dif_text, (540, 30))
         # === LADICÍ OBRYSY (obdélníky kolem sprite.rect) ===
         #for sprite in my_sprites:
          #   pygame.draw.rect(screen, (255, 0, 0), sprite.rect, 2)
